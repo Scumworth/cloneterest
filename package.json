@@ -1,0 +1,29 @@
+{
+    "name": "cloneterest-server",
+    "version": "1.0.0",
+    "engines": {
+        "node": "6.11.x"
+    },
+    "scripts": {
+        "start": "node server",
+        "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    },
+    "cacheDirectories": [
+        "node_modules",
+        "client/node_modules"
+    ],
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "cors": "^2.8.4",
+        "express": "^4.16.2",
+        "mongoose": "^4.13.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Scumworth/bookclub.git"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "nodemon": "^1.12.1"
+    }
+}
