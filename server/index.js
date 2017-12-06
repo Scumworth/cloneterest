@@ -15,6 +15,7 @@ const expressJwt = require('express-jwt');
 const router = express.Router();
 const PORT = process.env.PORT || 3001;
 const { User } = require('./models/user');
+const { Clone } = require('./models/clone');
 const passportConfig = require('./passport');
 
 passportConfig();
@@ -142,6 +143,97 @@ router.route('/auth/twitter')
         };
         return next();
     }, generateToken, sendToken);
+
+router.route('/clones')
+    .get((req, res) => {
+        Clone.find({}).then((clones) => {
+            res.json(clones);
+        }, (e) => {
+            res.status(400).send(e);
+        });
+    })
+    .post((req, res) => {
+        const clone = new Clone({
+            userName: req.body.userName,
+            title: req.body.title,
+            imgUrl: req.body.imgUrl,
+            cloners: [],
+            likers: []
+        })
+        clone.save().then((clone) => {
+            res.send({ message: 'New Clone Saved! '});
+        }, (e) => {
+            res.status(400).send(e);
+        });
+    })
+    .patch((req, res) => {
+        Clone.findOne({ imgUrl: req.body.imgUrl }).then((clone) => {
+            if (clone && clone.cloners.indexOf(req.body.user) === -1) {
+                Clone.findOneAndUpdate(
+                    { imgUrl: req.body.imgUrl },
+                    { $set: { cloners: clone.cloners.concat([req.body.user]) } }
+                ).then(() => {
+                    res.send({ message: 'user has been added as cloner to clone.' })
+                }, (e) => res.status(400).send(e));
+            } 
+            else if (clone && clone.cloners.indexOf(req.body.user) !== -1) {
+                Clone.findOneAndUpdate(
+                    { imgUrl: req.body.imgUrl },
+                    { $set: { cloners: clone.cloners.filter((cloner) => cloner !== req.body.user) } },
+                    { new: true }
+                ).then(() => {
+                    res.send({ message: 'user has been removed as cloner from clone' })
+                }, (e) => res.status(400).send(e));
+            }
+        })
+    })
+    .delete((req, res) => {
+        Clone.remove({ imgUrl: req.query.imgUrl })
+            .then((request) => {
+                console.log('Clone removed');
+                res.send({ message: 'Clone deleted'});
+            }, (e) => res.status(400).send(e))
+    })
+
+router.route('/likes')
+    .patch((req, res) => {
+        Clone.findOne({ imgUrl: req.body.imgUrl }).then((clone) => {
+            if (clone && clone.likers.indexOf(req.body.user) === -1) {
+                Clone.findOneAndUpdate(
+                    { imgUrl: req.body.imgUrl },
+                    { $set: { likers: clone.likers.concat([req.body.user]) } }
+                ).then(() => {
+                    res.send({ message: 'user has been added as liker to clone.' })
+                }, (e) => res.status(400).send(e));
+            }
+            else if (clone && clone.likers.indexOf(req.body.user) !== -1) {
+                Clone.findOneAndUpdate(
+                    { imgUrl: req.body.imgUrl },
+                    { $set: { likers: clone.likers.filter((liker) => liker !== req.body.user) } },
+                    { new: true }
+                ).then(() => {
+                    res.send({ message: 'user has been removed as liker from clone.'})
+                }, (e) => res.status(400).send(e))
+            }
+        })
+    })
+router.route('/mycloneboard')
+    .get((req, res) => {
+        const myCloneBoard = [];
+        const userName = req.query.userName;
+        Clone.find({}).then((clones) => {
+            for (let i = 0; i < clones.length; i++) {
+                if (clones[i].userName === req.query.userName || clones[i].cloners.indexOf(req.query.userName !== -1)){
+                    myCloneBoard.push(clones[i]);
+                }
+            }
+            res.send(myCloneBoard);
+            //filter clones for clones that belong on my cloneboard and push
+        }, (e) => {
+            res.status(400).send(e);
+        })
+    })
+
 
 app.use('/api', router);
 
