@@ -4,7 +4,7 @@ import React from 'react';
 import { Jumbotron, Navbar, Nav, NavItem } from 'react-bootstrap';
 import TwitterLogin from 'react-twitter-auth';
 
-const Header =  ( { onSuccess, onFailure, logOut, handleClick, isAuthenticated }) => (
+const Header =  ( { onSuccess, onFailure, logout, handleClick, isAuthenticated }) => (
     <div>
         <Navbar>
             <Nav bsStyle = "pills">
@@ -23,7 +23,7 @@ const Header =  ( { onSuccess, onFailure, logOut, handleClick, isAuthenticated }
                             requestTokenUrl = "http://localhost:3001/api/auth/twitter/reverse"
                         />
                         </NavItem>
-                        : null
+                        : <NavItem onClick = { (e) => logout(e) }>Logout</NavItem>
                 }
             </Nav>
         </Navbar>

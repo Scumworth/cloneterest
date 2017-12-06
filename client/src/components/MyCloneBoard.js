@@ -9,7 +9,6 @@ const MyCloneBoard = ({ openForm, closeForm, showForm,
     handleChangeImgUrl, title, imgUrl, baseUrl, userName,
     handleLike, handleReClone, handleRemove, user }) => (
     <div style = {{ textAlign: 'center' }}>
-        <h1>MyCloneBoard</h1>
         <Button onClick = { (e) => openForm(e) }>
             Create New Clone
         </Button>

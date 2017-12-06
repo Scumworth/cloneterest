@@ -3,8 +3,8 @@
 import React from 'react';
 
 const Footer = () => (
-    <div>
-        <p>footer</p>
+    <div style = {{ textAlign: 'center', marginTop: 200 }}>
+        <a href = "https://github.com/Scumworth/cloneterest">Github</a>
     </div>
 );
 

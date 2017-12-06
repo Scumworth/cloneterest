@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { login, getMyCloneBoard, getRecentClones } from './../actions';
+import { login, getMyCloneBoard, getRecentClones, logout } from './../actions';
 import MyCloneBoardContainer from './MyCloneBoardContainer';
 import RecentClonesContainer from './RecentClonesContainer';
 import Header from './../components/Header';
@@ -24,6 +24,7 @@ class App extends Component {
                     onSuccess = { this.props.onSuccess }
                     onFailure = { this.props.onFailure }
                     handleClick = { this.props.handleClick }
+                    logout = { this.props.logout }
                 />
                 <Switch>
                     <Route exact path = "/" render = { () => <LandingPage /> } />
@@ -120,6 +121,11 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(getMyCloneBoard(baseUrl, user));
                     }, (e) => console.log(e))
             }
+        },
+        logout: (e) => {
+            e.preventDefault();
+            dispatch(logout());
+            dispatch(push('/'));
         },
         dispatch
     }
