@@ -12,7 +12,7 @@ import Footer from './../components/Footer';
 import LandingPage from './../components/LandingPage';
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3001/api';
+const baseUrl = 'https://sheltered-gorge-20702.herokuapp.com/api';
 
 class App extends Component {
     render() {
