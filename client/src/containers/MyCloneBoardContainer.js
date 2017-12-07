@@ -33,7 +33,8 @@ class MyCloneBoardContainer extends Component {
                         openUser = { this.props.openUser }
                         closeUser = { this.props.closeUser }
                         showUser = { this.props.showUser }
-                        usersClonesLoaded = { this.props.usersClonesResults }
+                        usersClonesLoaded = { this.props.usersClonesLoaded }
+                        usersClonesResults = { this.props.usersClonesResults }
                     />
                 </Loader>
             </div>
