@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { login, getMyCloneBoard, getRecentClones, logout } from './../actions';
+import { login, getMyCloneBoard, getRecentClones, getUsersClones, logout } from './../actions';
 import MyCloneBoardContainer from './MyCloneBoardContainer';
 import RecentClonesContainer from './RecentClonesContainer';
 import Header from './../components/Header';
@@ -84,6 +84,7 @@ const mapDispatchToProps = (dispatch) => {
                 .then((response) => {
                     dispatch(getRecentClones(baseUrl));
                     dispatch(getMyCloneBoard(baseUrl, user));
+                    dispatch(getUsersClones(baseUrl, userName));
                 }, (e) => console.log(e))
         },
         handleReClone: (e, user, userName, baseUrl, imgUrl, cloners) => {
@@ -97,6 +98,7 @@ const mapDispatchToProps = (dispatch) => {
                     .then((response) => {
                         dispatch(getRecentClones(baseUrl));
                         dispatch(getMyCloneBoard(baseUrl, user));
+                        dispatch(getUsersClones(baseUrl, userName));
                     }, (e) => console.log(e))
             }
         },
