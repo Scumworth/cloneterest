@@ -13,7 +13,6 @@ const MyCloneBoard = ({ openForm, closeForm, showForm,
             width: 300, 
             height: 300,
             verticalAlign: 'center', 
-            textAlign: 'center',
             backgroundColor: 'lightGray',
             borderRadius: 10,
             display: 'inline-block'
