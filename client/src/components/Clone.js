@@ -34,7 +34,7 @@ const Clone = ({ user, userName, title, imgUrl, likers, cloners, handleLike,
             </Row>
             <Row>
                 <Col xs = { 6 }>
-                    <p> { userName } </p>
+                    <p style = {{ fontSize: 8 }}> { userName } </p>
                 </Col>
                 <Col xs = { 3 }>
                     <Button onClick = { (e) => handleLike(e, user, userName, baseUrl, imgUrl, likers) }>
