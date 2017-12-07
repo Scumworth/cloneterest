@@ -30,6 +30,10 @@ class MyCloneBoardContainer extends Component {
                         handleLike = { this.props.handleLike }
                         handleReClone = { this.props.handleReClone }
                         handleRemove = { this.props.handleRemove }
+                        openUser = { this.props.openUser }
+                        closeUser = { this.props.closeUser }
+                        showUser = { this.props.showUser }
+                        usersClonesLoaded = { this.props.usersClonesResults }
                     />
                 </Loader>
             </div>

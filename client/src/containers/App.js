@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { login, getMyCloneBoard, getRecentClones, getUsersClones, logout } from './../actions';
+import { login, getMyCloneBoard, getRecentClones, getUsersClones, openUser, closeUser, logout } from './../actions';
 import MyCloneBoardContainer from './MyCloneBoardContainer';
 import RecentClonesContainer from './RecentClonesContainer';
 import Header from './../components/Header';
@@ -31,18 +31,29 @@ class App extends Component {
                     <Route path = "/mycloneboard" render = { () => 
                         <MyCloneBoardContainer 
                             user = { this.props.user }
+                            openUser = { this.props.openUser }
+                            closeUser = { this.props.closeUser }
                             baseUrl = { baseUrl }
                             handleLike = { this.props.handleLike } 
                             handleReClone = { this.props.handleReClone }
                             handleRemove = { this.props.handleRemove }
+                            showUser = { this.props.showUser }
+                            usersClonesLoaded = { this.props.usersClonesLoaded }
+                            usersClonesResults = { this.props.usersClonesResults }
+
                          /> } />
                     <Route path = "/recentclones" render = { () => 
                         <RecentClonesContainer  
                             user = { this.props.user } 
                             baseUrl = { baseUrl } 
+                            openUser = { this.props.openUser }
+                            closeUser = { this.props.closeUser }
                             handleLike = { this.props.handleLike }
                             handleReClone = { this.props.handleReClone }
                             handleRemove = { this.props.handleRemove }
+                            showUser = { this.props.showUser }
+                            usersClonesLoaded = { this.props.usersClonesLoaded }
+                            usersClonesResults = { this.props.usersClonesResults }
                         /> } />
                 </Switch>
                 <Footer />
@@ -52,9 +63,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { login } = state;
+    const { login, userBoard, usersClones } = state;
+    const { usersClonesLoaded, isFetchingUsersClones, usersClonersResults } = usersClones;
+    const { showUser } = userBoard
     const { isAuthenticated, user, token } = login;
-    return { isAuthenticated, user, token }
+    return { isAuthenticated, user, token, usersClonesLoaded, isFetchingUsersClones, 
+    usersClonersResults, showUser }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -128,6 +142,14 @@ const mapDispatchToProps = (dispatch) => {
             e.preventDefault();
             dispatch(logout());
             dispatch(push('/'));
+        },
+        openUser: (e, baseUrl, userName) => {
+            e.preventDefault();
+            dispatch (getUsersClones(baseUrl, userName)); 
+            dispatch(openUser());
+        },
+        closeUser: () => {
+            dispatch(closeUser());
         },
         dispatch
     }

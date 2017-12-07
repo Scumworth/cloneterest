@@ -3,12 +3,43 @@
 import React from 'react';
 import { Form, FormControl, Button, Modal, Row, Col } from 'react-bootstrap';
 import Clone from './Clone';
+const Loader = require('react-loader');
 
 const MyCloneBoard = ({ openForm, closeForm, showForm, 
     myCloneBoardResults, handleSubmitNewClone, handleChangeTitle,
     handleChangeImgUrl, title, imgUrl, baseUrl, userName,
-    handleLike, handleReClone, handleRemove, user }) => (
+    handleLike, handleReClone, handleRemove, user,
+    showUser, closeUser, usersClonesLoaded, usersClonesResults, openUser
+}) => (
     <div style = {{ textAlign: 'center' }}>
+        <Modal show = { showUser } onHide = { closeUser }>
+            <Modal.Header closeButton>
+            </Modal.Header>
+            <Modal.Body>
+                <Loader loaded = { usersClonesLoaded } >
+                { usersClonesResults.length > 0
+                        ? usersClonesResults.map((result) => <Clone
+                            key = { result.userName + result.title }
+                            userName = { result.userName }
+                            user = { user }
+                            title = { result.title }
+                            imgUrl = { result.imgUrl }
+                            likers = { result.likers }
+                            cloners = { result.cloners }
+                            handleLike = { handleLike }
+                            handleReClone = { handleReClone }
+                            baseUrl = { baseUrl }
+                        />)
+                        : null
+                        
+                } 
+                </Loader>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick = { closeUser }>Close</Button>
+            </Modal.Footer>
+        </Modal>
+
         <Modal show = { showForm } onHide = { closeForm }>
             <Modal.Header closeButton>
                 <Modal.Title>Create New Clone</Modal.Title>
@@ -59,6 +90,7 @@ const MyCloneBoard = ({ openForm, closeForm, showForm,
                         handleLike = { handleLike }
                         handleReClone = { handleReClone }
                         handleRemove = { handleRemove }
+                        openUser = { openUser }
                     />)
                 :null
         }

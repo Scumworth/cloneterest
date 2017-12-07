@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecentClones from './../components/RecentClones';
-import { getRecentClones, getUsersClones, closeUser, openUser } from './../actions';
+import { getRecentClones } from './../actions';
 const Loader = require('react-loader');
 
 class RecentClonesContainer extends Component {
@@ -49,14 +49,6 @@ const mapDispatchToProps = (dispatch) => {
         getRecentClones: (baseUrl) => {
             dispatch(getRecentClones(baseUrl));
         },        
-        openUser: (e, baseUrl, userName) => {
-            e.preventDefault();
-            dispatch (getUsersClones(baseUrl, userName)); 
-            dispatch(openUser());
-        },
-        closeUser: () => {
-            dispatch(closeUser());
-        },
         dispatch
     }
 };
