@@ -64,11 +64,11 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     const { login, userBoard, usersClones } = state;
-    const { usersClonesLoaded, isFetchingUsersClones, usersClonersResults } = usersClones;
+    const { usersClonesLoaded, isFetchingUsersClones, usersClonesResults } = usersClones;
     const { showUser } = userBoard
     const { isAuthenticated, user, token } = login;
     return { isAuthenticated, user, token, usersClonesLoaded, isFetchingUsersClones, 
-    usersClonersResults, showUser }
+    usersClonesResults, showUser }
 };
 
 const mapDispatchToProps = (dispatch) => {
