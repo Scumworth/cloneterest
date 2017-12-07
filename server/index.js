@@ -223,7 +223,7 @@ router.route('/mycloneboard')
         const userName = req.query.userName;
         Clone.find({}).then((clones) => {
             for (let i = 0; i < clones.length; i++) {
-                if (clones[i].userName === req.query.userName || clones[i].cloners.indexOf(req.query.userName !== -1)){
+                if (clones[i].userName === req.query.userName || clones[i].cloners.indexOf(req.query.userName) !== -1){
                     myCloneBoard.push(clones[i]);
                 }
             }
