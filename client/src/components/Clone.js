@@ -8,7 +8,7 @@ import faStyles from 'font-awesome/css/font-awesome.css';
 const Clone = ({ user, userName, title, imgUrl, likers, cloners, handleLike,
     handleReClone, handleRemove, baseUrl, openUser }) => (
         <div style = {{ 
-            width: 250,
+            width: 300,
             display: 'inline-block', 
             backgroundColor: 'lightGray', 
             borderRadius: 10, 
