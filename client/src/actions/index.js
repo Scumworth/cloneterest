@@ -3,12 +3,16 @@
 import axios from 'axios';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const REQUEST_USERS_CLONES = 'REQUEST_USERS_CLONES';
+export const RECEIVE_USERS_CLONES = 'RECEIVE_USERS_CLONES';
 export const REQUEST_RECENT_CLONES = 'REQUEST_RECENT_CLONES';
 export const RECEIVE_RECENT_CLONES = 'RECEIVE_RECENT_CLONES';
 export const REQUEST_MY_CLONE_BOARD = 'REQUEST_MY_CLONE_BOARD';
 export const RECEIVE_MY_CLONE_BOARD = 'RECEIVE_MY_CLONE_BOARD';
 export const OPEN_FORM = 'OPEN_FORM';
 export const CLOSE_FORM = 'CLOSE_FORM';
+export const OPEN_USER = 'OPEN_USER';
+export const CLOSE_USER = 'CLOSE_USER';
 export const SELECT_TITLE = 'SELECT_TITLE';
 export const SELECT_IMG_URL = 'SELECT_IMG_URL';
 
@@ -30,6 +34,14 @@ export const closeForm = () => ({
     type: CLOSE_FORM
 });
 
+export const openUser = () => ({
+    type: OPEN_USER
+});
+
+export const closeUser =  () => ({
+    type: CLOSE_USER
+});
+
 export const selectTitle = (title) => ({
     type: SELECT_TITLE,
     title
@@ -39,6 +51,28 @@ export const selectImgUrl = (imgUrl) => ({
     type: SELECT_IMG_URL,
     imgUrl
 });
+
+export const requestUsersClones = () => ({
+    type: REQUEST_USERS_CLONES,
+});
+
+export const receiveUsersClones = (data) => ({
+    type: RECEIVE_USERS_CLONES,
+    usersClonesResults: data.map((clone) => ({...clone}))
+});
+
+export const getUsersClones = (baseUrl, userName) => dispatch => {
+    dispatch(requestUsersClones);
+    axios.get(`${baseUrl}/mycloneboard`, {
+        params: { userName: userName }
+    })
+        .then((res) => {
+            return res.data;
+        }, (e) => console.log(e))
+        .then((data) => {
+            dispatch(receiveUsersClones(data));
+        });
+}
 
 export const requestRecentClones = () => ({
     type: REQUEST_RECENT_CLONES

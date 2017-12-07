@@ -6,7 +6,7 @@ import FontAwesome from 'react-fontawesome';
 import faStyles from 'font-awesome/css/font-awesome.css';
 
 const Clone = ({ user, userName, title, imgUrl, likers, cloners, handleLike,
-    handleReClone, handleRemove, baseUrl }) => (
+    handleReClone, handleRemove, baseUrl, openUser }) => (
         <div style = {{ 
             width: 300,
             display: 'inline-block', 
@@ -34,7 +34,9 @@ const Clone = ({ user, userName, title, imgUrl, likers, cloners, handleLike,
             </Row>
             <Row>
                 <Col xs = { 6 }>
-                    <p style = {{ fontSize: 8 }}> { userName } </p>
+                    <div onClick = { (e) => openUser(e, baseUrl, userName) }>
+                        <p style = {{ fontSize: 8 }}> { userName } </p>
+                    </div>
                 </Col>
                 <Col xs = { 3 }>
                     <Button onClick = { (e) => handleLike(e, user, userName, baseUrl, imgUrl, likers) }>

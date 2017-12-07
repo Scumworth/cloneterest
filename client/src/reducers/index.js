@@ -1,10 +1,14 @@
 // reducers/index.js
 
 import {
+    OPEN_USER,
+    CLOSE_USER,
     LOGIN_USER, 
     LOGOUT_USER,
     OPEN_FORM,
     CLOSE_FORM,
+    REQUEST_USERS_CLONES,
+    RECEIVE_USERS_CLONES,
     REQUEST_RECENT_CLONES,
     RECEIVE_RECENT_CLONES,
     REQUEST_MY_CLONE_BOARD,
@@ -69,6 +73,25 @@ export const form = (state = {
     }
 }
 
+export const userBoard = (state = {
+    showUser: false,
+}, action) => {
+    switch (action.type) {
+        case OPEN_USER:
+            return {
+                ...state,
+                showUser: true
+            }
+        case CLOSE_USER:
+            return {
+                ...state,
+                showUser: false
+            }
+        default:
+            return state;
+    }
+}
+
 export const recentClones = (state = {
     recentClonesLoaded: false,
     isFetchingRecentClones: false,
@@ -88,6 +111,29 @@ export const recentClones = (state = {
                 recentClonesResults: action.recentClonesResults
             }
          default:
+            return state;
+    }
+}
+
+export const usersClones = (state = {
+    usersClonesLoaded: false,
+    isFetchingUsersClones: false,
+    usersClonesResults: []
+}, action) => {
+    switch (action.type) {
+        case REQUEST_USERS_CLONES:
+            return {
+                ...state,
+                isFetchingUsersClones: true
+            }
+        case RECEIVE_USERS_CLONES:
+            return {
+                ...state,
+                isFetchingUsersClones: false,
+                usersClonesLoaded: true,
+                usersClonesResults: action.usersClonesResults
+            }
+        default:
             return state;
     }
 }
