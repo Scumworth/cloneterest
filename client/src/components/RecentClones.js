@@ -13,7 +13,8 @@ const RecentClones = ( { recentClonesResults, handleLike, handleReClone,
             <Modal.Header closeButton>
             </Modal.Header>
             <Modal.Body>
-                { usersClonesLoaded && usersClonesResults > 0
+                <Loader loaded = { this.props.usersClonesLoaded } >
+                { usersClonesResults.length > 0
                         ? usersClonesResults.map((result) => <Clone
                             key = { result.userName + result.title }
                             userName = { result.userName }
@@ -27,6 +28,7 @@ const RecentClones = ( { recentClonesResults, handleLike, handleReClone,
                         : null
                         
                 } 
+                </Loader>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick = { closeUser }>Close</Button>
