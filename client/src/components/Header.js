@@ -17,10 +17,10 @@ const Header =  ( { onSuccess, onFailure, logout, handleClick, isAuthenticated }
                 { !isAuthenticated
                         ? <NavItem>
                         <TwitterLogin 
-                            loginUrl = "https://sheltered-gorge-20702.herokuapp.com/api/auth/twitter"
+                            loginUrl = "https://cloneterestapp.herokuapp.com/api/auth/twitter"
                             onSuccess = { onSuccess } 
                             onFailure = { onFailure }
-                            requestTokenUrl = "https://sheltered-gorge-20702.herokuapp.com/api/auth/twitter/reverse"
+                            requestTokenUrl = "https://cloneterestapp.herokuapp.com/api/auth/twitter/reverse"
                         />
                         </NavItem>
                         : <NavItem onClick = { (e) => logout(e) }>Logout</NavItem>
