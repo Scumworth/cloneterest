@@ -13,7 +13,7 @@ const RecentClones = ( { recentClonesResults, handleLike, handleReClone,
             <Modal.Header closeButton>
             </Modal.Header>
             <Modal.Body>
-                <Loader loaded = { this.props.usersClonesLoaded } >
+                <Loader loaded = { usersClonesLoaded } >
                 { usersClonesResults.length > 0
                         ? usersClonesResults.map((result) => <Clone
                             key = { result.userName + result.title }
