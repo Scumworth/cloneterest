@@ -28,7 +28,7 @@ const Clone = ({ user, userName, title, imgUrl, likers, cloners, handleLike,
             <Row>
                 <Col xs = { 1 }></Col>
                 <Col xs = { 10 }>
-                    <Image width = "100%" src = { imgUrl }  onError = { (e) => e.target.setAttribute("src", "https://cdn.pixabay.com/photo/2016/11/30/12/09/question-mark-1872634_960_720.jpg") } responsive />
+                    <Image width = "100%" src = { imgUrl }  onError = { (e) => e.target.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Camera.svg/744px-Camera.svg.png") } responsive />
                 </Col>
                 <Col xs = { 1 }></Col>
             </Row>
