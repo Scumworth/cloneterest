@@ -234,6 +234,15 @@ router.route('/mycloneboard')
         })
     })
 
+router.route('/usercloneboard')
+    .get((req, res) => {
+        Clone.find({ userName: req.query.userName }).then((clones) => {
+            res.send(clones);
+        }, (e) => {
+            res.status(400).send(e);
+        })
+    })
+
 
 app.use('/api', router);
 

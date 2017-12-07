@@ -63,7 +63,7 @@ export const receiveUsersClones = (data) => ({
 
 export const getUsersClones = (baseUrl, userName) => dispatch => {
     dispatch(requestUsersClones);
-    axios.get(`${baseUrl}/mycloneboard`, {
+    axios.get(`${baseUrl}/usercloneboard`, {
         params: { userName: userName }
     })
         .then((res) => {
