@@ -11,10 +11,12 @@ const MyCloneBoard = ({ openForm, closeForm, showForm,
     <div style = {{ textAlign: 'center' }}>
         <div style = {{ 
             width: 300, 
+            height: 300,
             verticalAlign: 'center', 
             textAlign: 'center',
             backgroundColor: 'lightGray',
-            borderRadius: 10  
+            borderRadius: 10,
+            display: 'inline-block'
             }}>
             <Button onClick = { (e) => openForm(e) }>
                 Create New Clone
