@@ -62,10 +62,11 @@ const MyCloneBoard = ({ openForm, closeForm, showForm,
                     />)
                 :null
         }
-        
-        <Button onClick = { (e) => openForm(e) }>
-            Create New Clone
-        </Button>
+        <div> 
+            <Button onClick = { (e) => openForm(e) }>
+                Create New Clone
+            </Button>
+        </div>
 
     </div>
 );
