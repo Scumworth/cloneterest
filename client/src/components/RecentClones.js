@@ -24,6 +24,8 @@ const RecentClones = ( { recentClonesResults, handleLike, handleReClone,
                             likers = { result.likers }
                             cloners = { result.cloners }
                             handleLike = { handleLike }
+                            handleReClone = { handleReClone }
+                            baseUrl = { baseUrl }
                         />)
                         : null
                         
