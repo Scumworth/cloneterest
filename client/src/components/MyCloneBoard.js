@@ -9,18 +9,6 @@ const MyCloneBoard = ({ openForm, closeForm, showForm,
     handleChangeImgUrl, title, imgUrl, baseUrl, userName,
     handleLike, handleReClone, handleRemove, user }) => (
     <div style = {{ textAlign: 'center' }}>
-        <div style = {{ 
-            width: 300, 
-            height: 300,
-            verticalAlign: 'center', 
-            backgroundColor: 'lightGray',
-            borderRadius: 10,
-            display: 'inline-block'
-            }}>
-            <Button onClick = { (e) => openForm(e) }>
-                Create New Clone
-            </Button>
-        </div>
         <Modal show = { showForm } onHide = { closeForm }>
             <Modal.Header closeButton>
                 <Modal.Title>Create New Clone</Modal.Title>
@@ -74,6 +62,11 @@ const MyCloneBoard = ({ openForm, closeForm, showForm,
                     />)
                 :null
         }
+        
+        <Button onClick = { (e) => openForm(e) }>
+            Create New Clone
+        </Button>
+
     </div>
 );
 
