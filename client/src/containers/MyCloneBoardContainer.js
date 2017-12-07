@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
             })
                 .then((response) => {
                     console.log(response);
-                    dispatch(getMyCloneBoard(baseUrl));
+                    dispatch(getMyCloneBoard(baseUrl, user));
                 }, (e) => console.log(e))
         },
         handleOpenForm: (e) => {
