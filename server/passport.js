@@ -6,8 +6,8 @@ const { User } = require('./models/user');
 
 module.exports = function() {
     passport.use(new TwitterTokenStrategy({
-        consumerKey: process.env.TWITTER_CONSUMER_KEY,
-        consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+        consumerKey: process.env.REACT_APP_TWITTER_CONSUMER_KEY,
+        consumerSecret: process.env.REACT_APP_TWITTER_CONSUMER_SECRET,
         includeEmail: true
     },
         function(token, tokenSecret, profile, done) {

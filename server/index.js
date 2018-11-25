@@ -38,11 +38,13 @@ router.get('/', (req, res) => {
     res.json({ message: 'API Initialized' });
 });
 
+const JWT_SECRET = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PROD_JWT_SECRET : process.env.REACT_APP_DEV_JWT_SECRET;
+
 const createToken = (auth) => {
     return jwt.sign({
         id: auth.id
         // change my-secret below in production
-    }, process.env.DEVELOPMENT_JWT_SECRET, {
+    }, JWT_SECRET, {
         expiresIn: 60 * 120
     });
 };
@@ -60,7 +62,7 @@ const sendToken = (req, res) => {
 // token handling middleware
 const authenticate = expressJwt({
     //change my-secret belown in production!!! 
-    secret: process.env.DEVELOPMENT_JWT_SECRET,
+    secret: JWT_SECRET,
     requestProperty: 'auth',
     getToken: (req) => {
         if(req.headers['x-auth-token']) {
@@ -100,8 +102,8 @@ router.route('/auth/twitter/reverse')
             url: 'https://api.twitter.com/oauth/request_token',
             oauth: {
                 outh_callback: 'http%3A%2F%2Flocalhost%3A3000%2Ftwitter-callback',
-                consumer_key: process.env.TWITTER_CONSUMER_KEY,
-                consumer_secret: process.env.TWITTER_CONSUMER_SECRET
+                consumer_key: process.env.REACT_APP_TWITTER_CONSUMER_KEY,
+                consumer_secret: process.env.REACT_APP_TWITTER_CONSUMER_SECRET
             }
         }, (err, r, body) => {
             if(err) {
@@ -117,8 +119,8 @@ router.route('/auth/twitter')
         request.post({
             url: 'https://api.twitter.com/oauth/access_token?oauth_verifier',
             oauth: {
-                consumer_key: process.env.TWITTER_CONSUMER_KEY,
-                consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+                consumer_key: process.env.REACT_APP_TWITTER_CONSUMER_KEY,
+                consumer_secret: process.env.REACT_APP_TWITTER_CONSUMER_SECRET,
                 token: req.query.oauth_token
             },
             form: { oauth_verifier: req.query.oauth_verifier }
